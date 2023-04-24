@@ -1,7 +1,4 @@
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
+import '../screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductItem extends StatelessWidget {
@@ -19,23 +16,32 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridTile(
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
-        ),
-        footer: GridTileBar(
-          title: Text(
-            title,
-            textAlign: TextAlign.center,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(5),
+      child: GridTile(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed(ProductDetailScreen.routeName, arguments: id);
+            },
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+            ),
           ),
-          backgroundColor: Color.fromARGB(50, 0, 0, 0),
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.favorite),
-          ),
-          trailing:
-              IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
-        ));
+          footer: GridTileBar(
+            title: Text(
+              title,
+              textAlign: TextAlign.center,
+            ),
+            backgroundColor: Color.fromARGB(50, 0, 0, 0),
+            leading: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.favorite),
+            ),
+            trailing:
+                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+          )),
+    );
   }
 }
