@@ -1,7 +1,9 @@
+import '../providers/cart_provider.dart';
+
 import '../screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/product.dart';
+import '../providers/product_provider.dart';
 
 class ProductItem extends StatelessWidget {
   @override
@@ -9,6 +11,7 @@ class ProductItem extends StatelessWidget {
     final product = Provider.of<Product>(context,
         listen:
             false); //задаем Listen: false для того чтобы из-за обновления данные не происходил REbuild всего виджета а только того который завернут в Consumer
+    final cart = Provider.of<Cart>(context, listen: false);
     return
         //аналог Provider
         ClipRRect(
@@ -42,8 +45,11 @@ class ProductItem extends StatelessWidget {
                     : Icons.favorite_border),
               ),
             ),
-            trailing:
-                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+            trailing: IconButton(
+                onPressed: () {
+                  cart.addItem(product.id, product.price, product.title);
+                },
+                icon: Icon(Icons.shopping_cart)),
           )),
     );
   }
