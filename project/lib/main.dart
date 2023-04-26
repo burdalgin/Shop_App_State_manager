@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-          Products(), //Provider который предоставляет instance во все нижние классы, но обновляюься только те которые "слушают" изменения provider
+          Products(), //Provider который предоставляет instance во все нижние классы, но обновляются только те которые "слушают" изменения provider в том числе и context
+
       child: MaterialApp(
         title: 'MyShop',
         theme: ThemeData(primarySwatch: Colors.blue, accentColor: Colors.green),

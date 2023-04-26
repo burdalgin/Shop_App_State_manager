@@ -21,8 +21,9 @@ class ProductsGridView extends StatelessWidget {
           childAspectRatio: 3 / 2,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5),
-      itemBuilder: (context, index) => ChangeNotifierProvider(
-        create: (context) => products[index],
+      itemBuilder: (context, index) => ChangeNotifierProvider.value(
+        //используется .value в случае когда "слушаем" только данные но не context
+        value: products[index],
         child: ProductItem(
             // id: products[index].id,
             //  imageUrl: products[index].imageUrl,

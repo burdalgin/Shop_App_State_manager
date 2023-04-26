@@ -4,22 +4,14 @@ import 'package:provider/provider.dart';
 import '../providers/product.dart';
 
 class ProductItem extends StatelessWidget {
-  // const ProductItem({Key key}) : super(key: key);
-
-//  final String id;
-  //final String title;
-  // final String imageUrl;
-
-  //ProductItem({
-  //  this.id,
-  ///  this.title,
-  //  this.imageUrl,
-  //});
-
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
-    return ClipRRect(
+    final product = Provider.of<Product>(context,
+        listen:
+            false); //задаем Listen: false для того чтобы из-за обновления данные не происходил REbuild всего виджета а только того который завернут в Consumer
+    return
+        //аналог Provider
+        ClipRRect(
       borderRadius: BorderRadius.circular(5),
       child: GridTile(
           child: GestureDetector(
@@ -42,8 +34,13 @@ class ProductItem extends StatelessWidget {
               onPressed: () {
                 product.toggleFavoriteStatus();
               },
-              icon: Icon(
-                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              icon: Consumer<Product>(
+                // будет Rebuild только виджетов заврнутых в Consumer
+                builder: (context, value, _) => Icon(product
+                        .isFavorite //вместо _ указывается child если есть часть Widget tree которую мы хотим исключить из Rebuild
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+              ),
             ),
             trailing:
                 IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
