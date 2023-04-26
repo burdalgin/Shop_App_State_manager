@@ -3,7 +3,7 @@ import './screens/products_oveview_screen.dart';
 import './screens/product_details_screen.dart';
 import 'providers/products_provider.dart';
 import 'package:provider/provider.dart';
-import './providers/cart.dart';
+import 'providers/cart_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         ),
         //Provider который предоставляет instance во все нижние классы, но обновляются только те которые "слушают" изменения provider в том числе и context
         ChangeNotifierProvider(
-          create: (xtc) => Cart(),
+          create: (ctx) => Cart(),
         ),
       ],
       child: MaterialApp(
