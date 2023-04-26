@@ -37,20 +37,36 @@ class Products with ChangeNotifier {
     ),
   ];
 
+  var _showFavoritesOnly = false;
+
   List<Product>
       get items //используется копия _items для того чтобы можно было добавить метод notifyListeners() для обновления данных во всех виджетах которые используют этот класс
   {
+    //   if (_showFavoritesOnly == true)
+    //     return _items.where((prodItem) => prodItem.isFavorite).toList();
     return [..._items];
   }
 
-  Product findById(
-      String id) //описываем метод который возврашает элемент по заданному ID
+  List<Product> get favoriteItems {
+    return _items.where((element) => element.isFavorite == true).toList();
+  }
+
+  Product findById(String id) //метод который возврашает элемент по заданному ID
   {
     return _items.firstWhere((element) => element.id == id);
   }
 
-  void addProduct() {
-    // _items.add(value);
+  /*void showFavoritesOnly() {
+    _showFavoritesOnly = true;
     notifyListeners();
   }
+
+  void showAll() {
+    _showFavoritesOnly = false;
+    notifyListeners();
+  }
+
+  void addProduct() {
+    notifyListeners();
+  }*/
 }

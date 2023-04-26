@@ -5,12 +5,18 @@ import '../providers/products_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductsGridView extends StatelessWidget {
+  final bool showFavorite;
+
+  ProductsGridView(this.showFavorite);
+
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(
         context); // в провайдере указывается тип провайдера <Products>
-    final products = productsData
-        .items; //получаем доступ к item потому что в классе провайдера прописали get ...items
+    final products = showFavorite
+        ? productsData.favoriteItems
+        : productsData
+            .items; //получаем доступ к item потому что в классе провайдера прописали get ...items
 
     return GridView.builder(
       padding: const EdgeInsets.all(
