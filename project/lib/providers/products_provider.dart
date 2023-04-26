@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
+import 'product.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [
@@ -41,6 +41,12 @@ class Products with ChangeNotifier {
       get items //используется копия _items для того чтобы можно было добавить метод notifyListeners() для обновления данных во всех виджетах которые используют этот класс
   {
     return [..._items];
+  }
+
+  Product findById(
+      String id) //описываем метод который возврашает элемент по заданному ID
+  {
+    return _items.firstWhere((element) => element.id == id);
   }
 
   void addProduct() {

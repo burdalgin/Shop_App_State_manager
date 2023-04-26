@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import './product_item.dart';
-import '../models/product.dart';
-import '../providers/products.dart';
+import '../providers/product.dart';
+import '../providers/products_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductsGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context);
-    final products = productsData.items;
+    final productsData = Provider.of<Products>(
+        context); // в провайдере указывается тип провайдера <Products>
+    final products = productsData
+        .items; //получаем доступ к item потому что в классе провайдера прописали get ...items
 
     return GridView.builder(
       padding: const EdgeInsets.all(
@@ -19,10 +21,13 @@ class ProductsGridView extends StatelessWidget {
           childAspectRatio: 3 / 2,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5),
-      itemBuilder: (context, index) => ProductItem(
-        id: products[index].id,
-        imageUrl: products[index].imageUrl,
-        title: products[index].title,
+      itemBuilder: (context, index) => ChangeNotifierProvider(
+        create: (context) => products[index],
+        child: ProductItem(
+            // id: products[index].id,
+            //  imageUrl: products[index].imageUrl,
+            //  title: products[index].title,
+            ),
       ),
     );
   }

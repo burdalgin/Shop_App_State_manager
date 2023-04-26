@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart'; //позволяет использовать @requried
 
-class Product {
+class Product with ChangeNotifier {
   final String id;
   final String title;
   final String description;
@@ -18,4 +18,9 @@ class Product {
     this.isFavorite =
         false, //так как используется Optional Positional argument, при вызове класса можно не задавать значение, будет установлено по Default
   });
+
+  void toggleFavoriteStatus() {
+    isFavorite = !isFavorite;
+    notifyListeners(); //аналог SetState
+  }
 }
