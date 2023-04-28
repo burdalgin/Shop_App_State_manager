@@ -11,6 +11,7 @@ class CartItemView extends StatelessWidget {
   final String title;
   final String imageUrl;
   final double price;
+  final String productId;
 
   CartItemView({
     @required this.id,
@@ -18,12 +19,16 @@ class CartItemView extends StatelessWidget {
     @required this.title,
     @required this.price,
     @required this.imageUrl,
+    @required this.productId,
   });
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
       direction: DismissDirection.endToStart,
+      onDismissed: (direction) {
+        Provider.of<Cart>(context, listen: false).removeItem(productId);
+      },
       key: ValueKey(id),
       background: Container(
         alignment: Alignment.centerRight,

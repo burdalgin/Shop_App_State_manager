@@ -61,9 +61,8 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
-  int countOfProductsInaCart(
-      String title) //метод который возврашает элемент по заданному ID
-  {
-    return _items.values.where((element) => element.title == title).length;
+  void removeItem(String productId) {
+    _items.remove(productId);
+    notifyListeners();
   }
 }
