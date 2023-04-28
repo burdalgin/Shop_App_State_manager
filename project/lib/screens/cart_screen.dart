@@ -1,20 +1,55 @@
 import 'package:flutter/material.dart';
+import '../providers/products_provider.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart_provider.dart';
+import '../widgets/cart_item.dart';
 
 class CartScreen extends StatelessWidget {
+  static const routeName = '/cart-screen';
+
   @override
   Widget build(BuildContext context) {
-    final cartItemData = Provider.of<CartItem>(context);
     final cartData = Provider.of<Cart>(context);
+    final productData = Provider.of<Products>(context);
 
-    return ChangeNotifierProvider(
-      create: (context) => Cart(),
-      child: ListView.builder(
-          itemCount: cartData.itemCount,
-          itemBuilder: (context, index) => Container(
-                child: Card(elevation: 5, child: Text(cartItemData.title)),
-              )),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Shopping Cart"),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: cartData.itemCount,
+              itemBuilder: (ctx, index) => Container(
+                child: CartItemView(
+                  id: cartData.item.values.toList()[index].id,
+                  qantity: cartData.item.values.toList()[index].quantity,
+                  title: cartData.item.values.toList()[index].title,
+                  price: cartData.item.values.toList()[index].price,
+                  imageUrl: productData.items
+                      .firstWhere((element) =>
+                          element.title ==
+                          cartData.item.values.toList()[index].title)
+                      .imageUrl,
+                ),
+              ),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              leading: Text("Total SUM"),
+              title: Chip(
+                label: Text('\$${cartData.totalAmount}'),
+              ),
+              trailing: TextButton.icon(
+                  onPressed: (() {}),
+                  icon: Icon(Icons.access_time_sharp),
+                  label: Text('OREDR NOW')),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

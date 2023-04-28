@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/cart_screen.dart';
 import './screens/products_oveview_screen.dart';
 import './screens/product_details_screen.dart';
 import 'providers/products_provider.dart';
@@ -11,11 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
+      providers: //ProviderЫ которые предоставляет instance во все нижние классы, но обновляются только те которые "слушают" изменения provider в том числе и context
+          [
         ChangeNotifierProvider(
           create: (ctx) => Products(),
         ),
-        //Provider который предоставляет instance во все нижние классы, но обновляются только те которые "слушают" изменения provider в том числе и context
         ChangeNotifierProvider(
           create: (ctx) => Cart(),
         ),
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         home: ProductsOverviewScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          CartScreen.routeName: (ctx) => CartScreen(),
         },
       ),
     );

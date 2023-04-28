@@ -1,4 +1,5 @@
-import 'package:provider/provider.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CartItem {
@@ -16,17 +17,30 @@ class CartItem {
 }
 
 class Cart with ChangeNotifier {
-  Map<String, CartItem> _items = {};
+  Map<String, CartItem> _items = {}; //если не иницаоизировать будет ошибка Null
 
-  Map<String, CartItem> get item {
+  Map<String, CartItem>
+      get item //_items прватна переменная, items к которой можно получить доступ через get, т.е.
+  {
     return {..._items};
   }
 
-  int get itemCount {
+  int get itemCount // подсчет кол-во товаров в корзине
+  {
     return _items.length;
   }
 
-  void addItem(String productId, double price, String title) {
+  double get totalAmount {
+    var total = 0.0;
+    _items.forEach((key, cartItem) {
+      total += cartItem.price * cartItem.quantity;
+    });
+    return total;
+  }
+
+  void addItem(String productId, double price,
+      String title) //метод добавления продукта в корзину
+  {
     if (_items.containsKey(productId)) {
       _items.update(
           productId,
@@ -45,5 +59,11 @@ class Cart with ChangeNotifier {
               quantity: 1));
     }
     notifyListeners();
+  }
+
+  int countOfProductsInaCart(
+      String title) //метод который возврашает элемент по заданному ID
+  {
+    return _items.values.where((element) => element.title == title).length;
   }
 }
