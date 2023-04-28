@@ -3,6 +3,7 @@ import '../providers/products_provider.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart_provider.dart';
 import '../widgets/cart_item.dart';
+import '../providers/orders.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart-screen';
@@ -44,7 +45,11 @@ class CartScreen extends StatelessWidget {
                 label: Text('\$${cartData.totalAmount}'),
               ),
               trailing: TextButton.icon(
-                  onPressed: (() {}),
+                  onPressed: (() {
+                    Provider.of<Orders>(context, listen: false).addOrder(
+                        cartData.item.values.toList(), cartData.totalAmount);
+                    cartData.clearCart();
+                  }),
                   icon: Icon(Icons.access_time_sharp),
                   label: Text('OREDR NOW')),
             ),
