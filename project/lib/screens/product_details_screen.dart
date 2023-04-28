@@ -16,6 +16,29 @@ class ProductDetailScreen extends StatelessWidget {
         productId); //findByID - это метод который описали в классе //listen = false не будет происхожить Rbuild когда изменятся данные
     return Scaffold(
       appBar: AppBar(title: Text(loadedProducts.title)),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 300,
+              width: double.infinity,
+              child: Image.network(
+                loadedProducts.imageUrl,
+                fit: BoxFit.cover,
+                // alignment: Alignment.topCenter,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text('\$${loadedProducts.price}'),
+            SizedBox(height: 10),
+            Text(
+              '${loadedProducts.description}',
+              softWrap: true,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
