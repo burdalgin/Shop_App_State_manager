@@ -29,6 +29,10 @@ class MainDrawer extends StatelessWidget {
       backgroundColor: Colors.white,
       child: Column(
         children: <Widget>[
+          AppBar(
+            title: Text('Hello Friend'),
+            automaticallyImplyLeading: false,
+          ),
           Container(
             height: 100,
             width: double.infinity,
