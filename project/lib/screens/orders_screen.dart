@@ -4,14 +4,16 @@ import '../providers/orders.dart';
 import '../widgets/order_item.dart';
 import '../providers/orders.dart';
 
-class OredersScreen extends StatelessWidget {
+class OrdersScreen extends StatelessWidget {
+  static const routeName = '/orders-screen';
+
   @override
   Widget build(BuildContext context) {
     final orders = Provider.of<Orders>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Oreders'),
+        title: Text('Orders'),
       ),
       body: ListView.builder(
         itemCount: orders.items.length,

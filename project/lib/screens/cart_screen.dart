@@ -51,7 +51,7 @@ class CartScreen extends StatelessWidget {
                     cartData.clearCart();
                   }),
                   icon: Icon(Icons.access_time_sharp),
-                  label: Text('OREDR NOW')),
+                  label: Text('ORDER NOW')),
             ),
           ),
         ],
