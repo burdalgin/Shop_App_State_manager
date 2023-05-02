@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/screens/cart_screen.dart';
-import '../providers/product_provider.dart';
-
 import '../widgets/products_grid_view.dart';
-import '../providers/products_provider.dart';
 import 'package:provider/provider.dart';
 import '../widgets/badge.dart';
 import '../providers/cart_provider.dart';
+import '../widgets/main_drawer.dart';
 
 enum FilterOptions {
   Favorites,
@@ -24,6 +22,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: Text('My Shop'),
         actions: <Widget>[
@@ -48,10 +47,12 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               });
             },
           ),
-          Consumer<Cart>(
-            builder: (_, cartData, ch) => Badge(
+          Consumer<
+                  Cart> //в данном случае не нужно использовать Provider.of(context) чтобы не обновлять весь Screen
+              (
+            builder: (_, cartData, childUpdate) => Badge(
               child:
-                  ch, //для того чтобы обновлялся только Badge а IconButton был статичным
+                  childUpdate, //обновляется только chchildUpdate для того чтобы обновлялся только Badge а IconButton был статичным
               value: cartData.itemCount.toString(),
             ),
             child: IconButton(
