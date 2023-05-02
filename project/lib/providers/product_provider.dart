@@ -19,7 +19,8 @@ class Product with ChangeNotifier {
         false, //так как используется Optional Positional argument, при вызове класса можно не задавать значение, будет установлено по Default
   });
 
-  void toggleFavoriteStatus() {
+  void toggleFavoriteStatus() //случает изменилось ли значение isFavorite
+  {
     isFavorite = !isFavorite;
     notifyListeners(); //аналог SetState
   }

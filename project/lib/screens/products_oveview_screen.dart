@@ -47,10 +47,12 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               });
             },
           ),
-          Consumer<Cart>(
-            builder: (_, cartData, ch) => Badge(
+          Consumer<
+                  Cart> //в данном случае не нужно использовать Provider.of(context) чтобы не обновлять весь Screen
+              (
+            builder: (_, cartData, childUpdate) => Badge(
               child:
-                  ch, //для того чтобы обновлялся только Badge а IconButton был статичным
+                  childUpdate, //обновляется только chchildUpdate для того чтобы обновлялся только Badge а IconButton был статичным
               value: cartData.itemCount.toString(),
             ),
             child: IconButton(
