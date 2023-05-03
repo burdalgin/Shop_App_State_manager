@@ -67,20 +67,26 @@ class Cart with ChangeNotifier {
   }
 
   void removeSingleItem(String productId) {
-    if (!_items.containsKey(productId)) {
+    if (!_items.containsKey(
+        productId)) //проверка является ли добавленный продукт частью Cart
+    {
       return;
     }
-    if (_items[productId].quantity > 1) {
+    if (_items[productId].quantity > 1) //
+    {
       _items.update(
           productId,
           (existingCartItem) => CartItem(
               id: existingCartItem.id,
               title: existingCartItem.title,
-              quantity: existingCartItem.quantity - 1,
+              quantity: existingCartItem.quantity -
+                  1, //КЛЮЧЕВОЕ если у нас уже есть такой продукт, то мы просто уменьшаем его кол-во
               price: existingCartItem.price));
     } else {
-      _items.remove(productId);
+      _items.remove(
+          productId); //тут выполняется условие items[productId].quantity = 1 (потому что уже проверили в первом условии на .quantity =0 )
     }
+    notifyListeners();
   }
 
   void clearCart() {
