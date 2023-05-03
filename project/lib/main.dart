@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: //ProviderЫ которые предоставляет instance во все нижние классы, но обновляются только те которые "слушают" изменения provider в том числе и context
+      providers: //ProviderЫ которые предоставляет instance во все нижние классы (дочерние), но обновляются только те которые "слушают" изменения provider в том числе и context
           [
         ChangeNotifierProvider(
           create: (ctx) => Products(),
