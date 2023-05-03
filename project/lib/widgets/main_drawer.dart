@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/orders_screen.dart';
+import '../screens/user_products_screen.dart';
 
 class ListTileWidget extends StatelessWidget {
   final String pageTitle;
@@ -49,10 +50,24 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           ListTileWidget(
+            pageTitle: 'Shop',
+            icon: Icons.shopping_cart_checkout_rounded,
+            tapHandler: () {
+              Navigator.of(context).pushNamed('/');
+            },
+          ),
+          ListTileWidget(
             pageTitle: 'Orders',
             icon: Icons.shopping_cart_checkout_rounded,
             tapHandler: () {
               Navigator.of(context).pushNamed(OrdersScreen.routeName);
+            },
+          ),
+          ListTileWidget(
+            pageTitle: 'Manage Products',
+            icon: Icons.dataset,
+            tapHandler: () {
+              Navigator.of(context).pushNamed(UserProductsScreen.routeName);
             },
           ),
         ],

@@ -25,7 +25,7 @@ class CartItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      confirmDismiss: (direction) //возвращает Bool Future элемент
+      confirmDismiss: (direction) //ожидает значение Bool Future
           {
         return showDialog(
           context: context,
