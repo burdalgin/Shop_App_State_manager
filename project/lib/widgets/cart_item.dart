@@ -25,6 +25,32 @@ class CartItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
+      confirmDismiss: (direction) //возвращает Bool Future элемент
+          {
+        return showDialog(
+          context: context,
+          builder: ((ctx) => AlertDialog(
+                  title: Text('Are U SURE?'),
+                  content:
+                      Text('Do you want to remove the item from the cart??? '),
+                  actions: [
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.of(ctx).pop(true);
+                      },
+                      icon: Icon(Icons.delete),
+                      label: Text('Yes'),
+                    ),
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.of(ctx).pop(false);
+                      },
+                      icon: Icon(Icons.disabled_by_default),
+                      label: Text('NO'),
+                    )
+                  ])),
+        );
+      },
       direction: DismissDirection.endToStart,
       onDismissed: (direction) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
