@@ -4,13 +4,13 @@ import '../providers/cart_provider.dart';
 class OrderItems {
   final String id;
   final double amount;
-  final List<CartItem> products;
+  final List<CartItem> orderProducts;
   final DateTime dateTime;
 
   OrderItems({
     @required this.id,
     @required this.amount,
-    @required this.products,
+    @required this.orderProducts,
     @required this.dateTime,
   });
 }
@@ -28,7 +28,7 @@ class Orders with ChangeNotifier {
         OrderItems(
             id: DateTime.now().toString(),
             amount: amount,
-            products: cartProducts,
+            orderProducts: cartProducts,
             dateTime: DateTime.now()));
     notifyListeners();
   }
