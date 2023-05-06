@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../providers/product_provider.dart';
+import 'package:provider/provider.dart';
+import '../providers/products_provider.dart';
 
 class EditProductScreen extends StatefulWidget {
   static const routeName = '/edit-product-screen';
@@ -24,7 +26,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   void _updateImageUrl() {
-    if (!_imageUrlFocusNode.hasFocus) {
+    if (!_imageUrlFocusNode
+        .hasFocus) // будет обновлять Image preview только если выполняется проверка
+    {
       if (_imageUrlController.text.isEmpty ||
           (!_imageUrlController.text.startsWith('http') &&
                   !_imageUrlController.text.startsWith('https')) &&
@@ -44,6 +48,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
     }
 
     _form.currentState.save(); //сохраняем данные черезе Global Key - FormState
+    Provider.of<Products>(context, listen: false)
+        .addProduct(_editedProduct); //сохраняем в Products
+    Navigator.of(context).pop();
   }
 
   @override
