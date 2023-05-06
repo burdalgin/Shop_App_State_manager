@@ -24,7 +24,9 @@ class CartScreen extends StatelessWidget {
               itemCount: cartData.itemCount,
               itemBuilder: (ctx, index) => Container(
                 child: CartItemView(
-                  id: cartData.item.values.toList()[index].id,
+                  id: cartData.item.values
+                      .toList()[index]
+                      .id, //как получить доступ к значениям из MAP - перевести Values.toList() потом [Index] потом самое поле значений
                   qantity: cartData.item.values.toList()[index].quantity,
                   title: cartData.item.values.toList()[index].title,
                   price: cartData.item.values.toList()[index].price,
